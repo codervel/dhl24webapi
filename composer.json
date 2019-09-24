@@ -1,0 +1,20 @@
+{
+    "name": "codervel/dhl24webapi",
+    "description": "Dhl24 WebAPI",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "codervel@gmail.com",
+            "email": "codervel@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4":{
+            "Codervel\\Dhl24WebApi\\" : "src/"
+
+        }
+    }
+}
