@@ -9,6 +9,7 @@
             "email": "codervel@gmail.com"
         }
     ],
+    "minimum-stability": "stable",
     "require": {
         "php": "^7.0",
         "laravel/laravel": "^5.5"
