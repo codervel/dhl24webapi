@@ -110,15 +110,15 @@ class Dhl24WebApi
     		if(is_array($labels)){
     			$labelsArray = [];
     			foreach($labels as $label)
-    				array_push($labelsArray,new ItemToPrintResponse($label));
+    				array_push($labelsArray, ItemToPrintResponse::createFromStdClass($label));
     			return $labelsArray;
     		}
 
-    		return new ItemToPrintResponse($labels);
+    		return ItemToPrintResponse::createFromStdClass($labels);
 
     	} catch(\Exception $e){
 
-    		return new stdClass();
+    		return new ItemToPrintResponse();
     	}
     }
 
