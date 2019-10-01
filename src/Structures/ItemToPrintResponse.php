@@ -10,15 +10,19 @@ use stdClass;
 class ItemToPrintResponse extends Model
 {
     
-    public function __construct(stdClass $label){
+
+    public static function createFromStdClass(stdClass $label){
 
     	$values = (array) $label;
-    	$this->setRawAttributes($values, true);
-    	return $this;
+    	$item  = new self;
+    	$item->setRawAttributes($values, true);
+    	return $item;
     }
 
     public function getFileToPrint(){
 
-    	return Response::make(base64_decode($this->labelData), 200, array('content-type' => $this->labelMimeType));
+    	if(isset($this->labelData))
+    		return Response::make(base64_decode($this->labelData), 200, array('content-type' => $this->labelMimeType));
+    	else return 'No data';
     }
 }
