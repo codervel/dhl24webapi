@@ -17,9 +17,9 @@ class Dhl24WebApi
 	protected $pieceDefinition;
 
 
-    public function __construct(){
+    public function __construct($driver = 1){
 
-        $this->apiClient = new Dhl24WebApiClient();
+        $this->apiClient = new Dhl24WebApiClient($driver);
     }
 
 
