@@ -42,8 +42,8 @@ class Dhl24WebApi
     public function bookCourierTodayAfternoon($shipmentList){
 
     	$pickupDate  = Carbon::now()->format('Y-m-d');
-    	$pickupTimeFrom  = config('dhl.api.pickupfrom');
-    	$pickupTimeTo = config('dhl.api.pickupto');
+    	$pickupTimeFrom  = config('dhl.api.'.$this->apiClient->driver.'.pickupfrom');
+    	$pickupTimeTo = config('dhl.api.'.$this->apiClient->driver.'.pickupto');
 
     	return $this->bookCourier($pickupDate, $pickupTimeFrom, $pickupTimeTo, $shipmentList);
     }

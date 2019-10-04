@@ -21,11 +21,11 @@ class PaymentData extends Model
     		return $this;
     	}
 
-    	public function shipperPays(){
+    	public function shipperPays($id  = 1){
 
     		$this->paymentMethod = "BANK_TRANSFER";
     		$this->payerType = "SHIPPER";
-    		$this->accountNumber = config('dhl.api.DHL_SAP');
+    		$this->accountNumber = config('dhl.api.'.$id.'.DHL_SAP');
 
     		return $this;
     	}
@@ -34,7 +34,7 @@ class PaymentData extends Model
 
     		$this->paymentMethod = "BANK_TRANSFER";
     		$this->payerType = "USER";
-    		$this->accountNumber = config('dhl.api.DHL_SAP');
+    		$this->accountNumber = config('dhl.api.'.$id.'.DHL_SAP');
 
     		return $this;
 

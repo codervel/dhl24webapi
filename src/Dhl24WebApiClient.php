@@ -12,12 +12,14 @@ class Dhl24WebApiClient extends SoapClient
 
     protected $authData = [];
 
+    public $driver;
+
     public function __construct($driver = 1)
     {
         parent::__construct( self::WSDL );
-
+        $this->driver = $driver;
         
-        $this->api = config('dhl.api.'.$driver);
+        $this->api = config('dhl.api.'.$this->driver);
         
         $this->authData = [
             'username' => $this->api['DHL_USER'],
