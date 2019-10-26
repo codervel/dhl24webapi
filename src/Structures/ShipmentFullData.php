@@ -34,12 +34,18 @@ class ShipmentFullData extends Model
 
     	$this->payment = $paymentData->toArray();
     	return $this;
-    }
+    }   
 
     public function setServiceDefinition(ServiceDefinition $serviceDefinition){
 
     	$this->service = $serviceDefinition->toArray();
     	return $this;
+    }
+
+    public function setServiceZK(){
+
+        $this->serviceType = "ZK";
+        return $this;
     }
 
     public function setShipmentDate($date){
@@ -65,6 +71,13 @@ class ShipmentFullData extends Model
     	$this->skipRestrictionCheck = $set;
     	return $this;
     }
+
+   public function setPaymentReturnData(PaymentData $paymentData){
+
+        $this->billing = $paymentData->toArray();
+        return $this;
+    }
+   
 
 }
 

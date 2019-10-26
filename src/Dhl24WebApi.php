@@ -57,6 +57,58 @@ class Dhl24WebApi
 
     }
 
+    public function createShipmentReturn(ShipmentFullData $ship){
+
+
+        $shipmentInfo = new stdClass();
+        $shipmentInfo->serviceType = $ship->serviceType;
+        unset($ship->serviceType);
+        $shipmentInfo->billing = $ship->billing;
+        unset($ship->billing);
+        $shipmentInfo->shipmentTime= new stdClass();
+         $labelExpDate = new Carbon($ship->shipmentDate);
+         $labelExpDate->addDays(7);
+
+         $shipmentInfo->shipmentTime->labelExpDate = $labelExpDate->toDateString();
+
+         $shipmentInfo->paymentType = "BANK_TRANSFER";
+         $shipmentInfo->bookCourier = true;
+         $shipmentInfo->labelType = "BLP";
+
+        $pieceList = $ship->pieceList;
+        unset($ship->pieceList);
+
+        $content = $ship->content;
+        unset($ship->content);
+
+        $shipper_address = new stdClass();
+        $shipper_address->address = $ship->shipper;
+        unset($ship->shipper);
+        $ship->shipper = $shipper_address;
+
+        $receiver_address = new stdClass();
+        $receiver_address->address = $ship->receiver;
+        unset($ship->receiver);
+        $ship->receiver = $receiver_address;
+
+
+        $shipment = new stdClass();
+
+        $shipment->pieceList = $pieceList;
+        $shipment->content = $content;
+        $shipment->shipmentInfo = $shipmentInfo;
+        $shipment->ship = $ship->toArray();
+
+        $shipmentData = [ 
+                            'authData' => $this->apiClient->getAuthData(), 
+                            'shipment' => $shipment,
+                        ];              
+   //     dd($shipmentData);
+        $shipmentsResult = $this->apiClient->createShipmentReturn($shipmentData);
+        return $shipmentsResult;
+
+    }
+
     public function createShipments($toShipment){
 
     	$shipments = new stdClass();

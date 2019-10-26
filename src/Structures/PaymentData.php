@@ -21,6 +21,14 @@ class PaymentData extends Model
     		return $this;
     	}
 
+        public function receiverPaysByBank($id = 1){
+
+            $this->paymentType = "BANK_TRANSFER";
+            $this->shippingPaymentType = "RECEIVER";
+            $this->billingAccountNumber = config('dhl.api.'.$id.'.DHL_SAP');
+            return $this;
+        }
+
     	public function shipperPays($id  = 1){
 
     		$this->paymentMethod = "BANK_TRANSFER";
@@ -30,7 +38,7 @@ class PaymentData extends Model
     		return $this;
     	}
 
-    	public function thirdPartyPays(){
+    	public function thirdPartyPays($id = 1){
 
     		$this->paymentMethod = "BANK_TRANSFER";
     		$this->payerType = "USER";

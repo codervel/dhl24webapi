@@ -12,7 +12,8 @@ class ServiceDefinition extends Model
 
     	parent::__construct();
 
-    	$this->product = $product;
+        if($product == "ZK") return $product;
+        else  $this->product = $product;
 
     	return $this;
     }
